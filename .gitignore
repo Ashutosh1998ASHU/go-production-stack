@@ -1,0 +1,16 @@
+# Go binaries
+web-server
+*.exe
+*.out
+
+# Logs
+*.log
+
+# VS Code
+.vscode/
+
+# macOS
+.DS_Store
+
+# Linux
+*.swp
