@@ -1,0 +1,33 @@
+# version: "3.9"
+services:
+# here redis is the service name 
+  redis: 
+    image: redis:latest
+    # container_name is the name of the container , here redis is container name 
+    container_name: redis
+    ports:
+      - "6379:6379"
+    networks:
+      - app-network
+    restart: unless-stopped
+  app: 
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    image: go-production-stack:v1
+    container_name: go-production-stack
+    ports:
+      - "9090:8080"
+    environment: 
+      SERVER_PORT: "8080"
+      REDIS_HOST: redis
+      REDIS_PORT: "6379"
+    depends_on:
+      - redis
+    networks:
+      - app-network  
+    restart: unless-stopped
+
+networks:
+  app-network:
+    driver: bridge
