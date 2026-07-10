@@ -1,36 +1,28 @@
-# Project Structure
-
-```
 go-production-stack/
 │
 ├── cmd/
-│   └── server/            # Application entrypoint
+│   └── server/
 │
 ├── internal/
-│   ├── config/            # Environment configuration
-│   ├── handlers/          # HTTP handlers
-│   ├── middleware/        # HTTP middleware
-│   └── redis/             # Redis client
+│   ├── config/
+│   │    ├── config.go
+│   ├── handlers/
+│   │   ├── home.go
+│   │   └── health.go
+│   │
+│   ├── middleware/
+│   │   ├── logger.go
+│   │   └── recovery.go
+│   │
+│   └── redis/
+│        ├── redis.go
 │
-├── docker/                # Dockerfiles
-├── compose/               # Docker Compose
-├── kubernetes/            # Kubernetes manifests
+├── docker/
+├── compose/
+├── kubernetes/
 ├── scripts/
-│   ├── bash/
-│   └── python/
-├── docs/                  # Project documentation
+├── docs/
 │
 ├── go.mod
 ├── go.sum
 └── README.md
-```
-
-## Design Principles
-
-- `cmd/` contains executable applications.
-- `internal/` contains private application code.
-- Infrastructure files are isolated from application code.
-- Scripts are grouped separately for automation.
-- Documentation is maintained independently.
-
-This layout follows the standard Go project structure and scales well for production applications.
