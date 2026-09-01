@@ -21,3 +21,14 @@ func InitRedis() {
 	})
 	fmt.Println("Redis Address", address)
 }
+
+func CloseRedis() {
+	if Client != nil {
+		if err := Client.Close(); err != nil {
+			fmt.Println("Error Closing Redis: ", err)
+			return
+		}
+		fmt.Println("Redis Connection Closed")
+	}
+
+}

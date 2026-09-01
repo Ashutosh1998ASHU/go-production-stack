@@ -7,9 +7,14 @@ import (
 )
 
 func HomeHandler(w http.ResponseWriter, r *http.Request) {
-	if r.URL.Path == "/favicon.ico" {
+	if r.URL.Path != "/" {
+		http.NotFound(w, r)
 		return
 	}
+
+	// if r.URL.Query().Get("panic") == "true" {
+	// 	panic("intentional panic")
+	// }
 
 	count, err := redis.Client.Incr(redis.Ctx, "visits").Result()
 	if err != nil {
