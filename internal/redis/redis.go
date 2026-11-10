@@ -15,9 +15,12 @@ var (
 
 func InitRedis() {
 	cfg := config.Load()
+
 	address := fmt.Sprintf("%s:%s", cfg.RedisHost, cfg.RedisPort)
+
 	Client = goredis.NewClient(&goredis.Options{
-		Addr: address,
+		Addr:     address,
+		Password: cfg.RedisPassword,
 	})
 	fmt.Println("Redis Address", address)
 }
@@ -32,3 +35,6 @@ func CloseRedis() {
 	}
 
 }
+
+// TODO: Add context timeout handling for Redis-dependent operations
+// to prevent requests from hanging when Redis is unavailable.
